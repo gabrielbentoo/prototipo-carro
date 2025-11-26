@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prototipo </title>
+    <style>
+        canvas {
+            background-color: #eee;
+            display: block;
+            margin: 20px auto;
+
+        }
+    </style>
+</head>
+<body>
+    <canvas id="game" width="400" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById("game");
+        const ctx = canvas.getContext("2d");
+        let playerX = 20;
+        let playerY = 140;
+        let finishLine = 350;
+
+        function draw() {
+            ctx.clearRect(0,0, canvas.width,canvas.height);
+            ctx.fillStyle = "red";
+            ctx.fillRect(finishLine,0 , 10, canvas.height);
+
+            ctx.fillStyle = "blue";
+            ctx.fillRect(playerX, playerY, 30,30);
+            
+        }
+
+        function update() {
+            draw();
+            requestAnimationFrame(update);
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") playerX += 10;
+            if (playerX >= finishLine) {
+                alert("Voce ganhou");
+                playerX = 20;
+
+            }
+        })
+        update();
+    </script>
+    
+</body>
+</html>
